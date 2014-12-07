@@ -16,32 +16,26 @@ CLOCK1  = π2 - HOUR2
 CLOCK2  = π2 - HOUR
 
 $(window).load ->
-  ctxs = setupCTXs()
-  draw(ctxs)
+  ctx = setupCTX()
+  draw(ctx)
 
 toRadians = (deg) ->
   deg * π / 180
 
-setupCTXs = ->
+setupCTX = ->
   height = $(document).height()
   width = $('body').width()
   canvasElement = $("<canvas id='canvas' height='#{height}px' width='#{width}px'></canvas>")
   $('body').append(canvasElement)
-  ctxs = []
-  t = 0
-  until t++ == 3
-    canvas = $('#canvas')[0]
-    ctx = canvas.getContext('2d')
-    ctx.fillStyle = '#000'
-    ctxs.push(ctx)
-  ctxs
+  ctx = canvas.getContext('2d')
+  ctx.fillStyle = 'green'
+  ctx
 
-draw = (ctxs) ->
-  ctx = ctxs[0]
+draw = (ctx) ->
   ctx.beginPath()
   ctx.moveTo(100,100)
   ctx.arc(100, 100, 50, CLOCK3, CLOCK7)
   ctx.closePath()
-  ctx.stroke()
-  ctx.fill()
+  ctx.clip()
+  ctx.fillRect(0,0,1000,1000)
 
