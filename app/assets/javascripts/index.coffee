@@ -27,15 +27,28 @@ setupCTX = ->
   width = $('body').width()
   canvasElement = $("<canvas id='canvas' height='#{height}px' width='#{width}px'></canvas>")
   $('body').append(canvasElement)
+  canvas = $('#canvas')[0]
   ctx = canvas.getContext('2d')
   ctx.fillStyle = 'green'
   ctx
 
 draw = (ctx) ->
+  centerWidth = $('body').width() / 2
+  centerHeight = $(document).height() / 2
+  ctx.save()
   ctx.beginPath()
-  ctx.moveTo(100,100)
-  ctx.arc(100, 100, 50, CLOCK3, CLOCK7)
+  ctx.moveTo(centerWidth,centerHeight)
+  ctx.arc(centerWidth, centerHeight, 100, CLOCK3, CLOCK5)
   ctx.closePath()
   ctx.clip()
-  ctx.fillRect(0,0,1000,1000)
-
+  ctx.fillRect(0,0,1000,10000)
+  ctx.restore()
+  ctx.translate(50,50)
+  ctx.save()
+  ctx.beginPath()
+  ctx.moveTo(centerWidth,centerHeight)
+  ctx.arc(centerWidth, centerHeight, 100, CLOCK3, CLOCK5)
+  ctx.closePath()
+  ctx.clip()
+  ctx.fillRect(0,0,1000,10000)
+  ctx.restore()
